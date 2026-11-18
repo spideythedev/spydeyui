@@ -30,7 +30,7 @@ function createElement(document, attributes = {}) {
       return target === this;
     },
     focus() {
-      document.activeElement = this;
+      this.ownerDocument.activeElement = this;
     }
   };
   return element;

@@ -8,7 +8,8 @@ const FOCUSABLE = [
   "iframe",
   "object",
   "embed",
-  "[contenteditable='true']",
+  "summary",
+  "[contenteditable]:not([contenteditable='false'])",
   "[tabindex]:not([tabindex='-1'])"
 ].join(",");
 
@@ -24,11 +25,17 @@ export function createFocusTrap(container, options = {}) {
   const fallbackTabindex = fallback.getAttribute("tabindex");
   let active = false;
 
-  if (!fallback.hasAttribute("tabindex")) fallback.setAttribute("tabindex", "-1");
+  if (fallback !== container && !container.contains(fallback)) {
+    throw new TypeError("The fallback focus target must be inside the trap.");
+  }
 
   const getFocusable = () => [...container.querySelectorAll(FOCUSABLE)].filter((element) => {
+    const style = document.defaultView?.getComputedStyle(element);
     return !element.hasAttribute("hidden") &&
       element.getAttribute("aria-hidden") !== "true" &&
+      !element.closest("[hidden], [inert], [aria-hidden='true']") &&
+      style?.visibility !== "hidden" &&
+      style?.display !== "none" &&
       element.getClientRects().length > 0;
   });
 
@@ -61,11 +68,18 @@ export function createFocusTrap(container, options = {}) {
     }
   };
 
+  const handleFocusin = (event) => {
+    if (active && !container.contains(event.target)) {
+      focus(getFocusable()[0] || fallback);
+    }
+  };
+
   const activate = () => {
     if (active) return;
     if (!fallback.hasAttribute("tabindex")) fallback.setAttribute("tabindex", "-1");
     active = true;
     document.addEventListener("keydown", handleKeydown, true);
+    document.addEventListener("focusin", handleFocusin, true);
     const target = typeof initialFocus === "function"
       ? initialFocus()
       : initialFocus || getFocusable()[0] || fallback;
@@ -76,6 +90,7 @@ export function createFocusTrap(container, options = {}) {
     if (!active) return;
     active = false;
     document.removeEventListener("keydown", handleKeydown, true);
+    document.removeEventListener("focusin", handleFocusin, true);
     if (restoreFocus && previous?.isConnected) focus(previous);
     if (fallbackTabindex === null) fallback.removeAttribute("tabindex");
     else fallback.setAttribute("tabindex", fallbackTabindex);

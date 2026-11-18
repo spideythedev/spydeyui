@@ -1,0 +1,22 @@
+{
+  "color": {
+    "background": "#09090b",
+    "surface": "#121215",
+    "surfaceRaised": "#18181b",
+    "foreground": "#fafafa",
+    "muted": "#a1a1aa",
+    "subtle": "#71717a",
+    "border": "#27272a",
+    "borderStrong": "#3f3f46",
+    "accent": "#e4e4e7",
+    "accentForeground": "#09090b",
+    "focus": "#a1a1aa"
+  },
+  "radius": {
+    "none": "0",
+    "sm": "2px",
+    "md": "4px",
+    "lg": "6px",
+    "full": "9999px"
+  }
+}

@@ -1,0 +1,56 @@
+.sy-field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sy-label {
+  color: var(--spydeyui-color-foreground, #fafafa);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.sy-input {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--spydeyui-color-border, #27272a);
+  border-radius: var(--spydeyui-radius-md, 4px);
+  background: var(--spydeyui-color-surface, #121215);
+  color: var(--spydeyui-color-foreground, #fafafa);
+  font: inherit;
+  font-size: 0.875rem;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.sy-input::placeholder {
+  color: var(--spydeyui-color-subtle, #71717a);
+}
+
+.sy-input:hover:not(:disabled) {
+  border-color: var(--spydeyui-color-border-strong, #3f3f46);
+}
+
+.sy-input:focus-visible {
+  border-color: var(--spydeyui-color-focus, currentColor);
+  outline: 2px solid var(--spydeyui-color-focus, currentColor);
+  outline-offset: 2px;
+}
+
+.sy-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sy-input[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.sy-input-description {
+  color: var(--spydeyui-color-muted, #a1a1aa);
+  font-size: 0.8125rem;
+}
+
+.sy-input-error {
+  color: #f87171;
+  font-size: 0.8125rem;
+}

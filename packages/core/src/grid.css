@@ -12,14 +12,14 @@
 .sy-stack {
   display: flex;
   flex-direction: column;
-  gap: var(--sy-stack-gap, 1rem);
+  gap: var(--spydeyui-stack-gap, 1rem);
 }
 
 .sy-cluster {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--sy-cluster-gap, 0.75rem);
+  gap: var(--spydeyui-cluster-gap, 0.75rem);
 }
 
 @media (max-width: 48rem) {

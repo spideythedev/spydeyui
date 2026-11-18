@@ -1,0 +1,29 @@
+.sy-container {
+  width: min(100% - 2rem, 80rem);
+  margin-inline: auto;
+}
+
+.sy-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--spydeyui-space-4, 1rem);
+}
+
+.sy-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sy-stack-gap, 1rem);
+}
+
+.sy-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sy-cluster-gap, 0.75rem);
+}
+
+@media (max-width: 48rem) {
+  .sy-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,90 @@
+.sy-button {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid transparent;
+  border-radius: var(--spydeyui-radius-md, 4px);
+  background: var(--spydeyui-color-accent, #e4e4e7);
+  color: var(--spydeyui-color-accent-foreground, #09090b);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.sy-button:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.sy-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.sy-button:focus-visible {
+  outline: 2px solid var(--spydeyui-color-focus, currentColor);
+  outline-offset: 3px;
+}
+
+.sy-button:disabled,
+.sy-button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sy-button--secondary {
+  border-color: var(--spydeyui-color-border, #27272a);
+  background: var(--spydeyui-color-surface, #121215);
+  color: var(--spydeyui-color-foreground, #fafafa);
+}
+
+.sy-button--outline {
+  border-color: var(--spydeyui-color-border-strong, #3f3f46);
+  background: transparent;
+  color: var(--spydeyui-color-foreground, #fafafa);
+}
+
+.sy-button--ghost {
+  background: transparent;
+  color: var(--spydeyui-color-foreground, #fafafa);
+}
+
+.sy-button--danger {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.sy-button--sm {
+  min-height: 2rem;
+  padding: 0.4375rem 0.625rem;
+  font-size: 0.8125rem;
+}
+
+.sy-button--lg {
+  min-height: 3rem;
+  padding: 0.875rem 1.125rem;
+  font-size: 1rem;
+}
+
+.sy-button--icon {
+  width: 2.5rem;
+  padding: 0;
+}
+
+.sy-button--full {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sy-button {
+    transition: none;
+  }
+
+  .sy-button:active:not(:disabled) {
+    transform: none;
+  }
+}

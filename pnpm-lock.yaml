@@ -1,0 +1,15 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+  .: {}
+  packages/core:
+    dependencies:
+      '@spydeyui/tokens':
+        specifier: workspace:^
+        version: link:../tokens
+  packages/primitives: {}
+  packages/tokens: {}

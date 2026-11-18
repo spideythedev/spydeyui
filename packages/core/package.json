@@ -1,0 +1,18 @@
+{
+  "name": "@spydeyui/core",
+  "version": "0.1.0",
+  "description": "Framework-independent styles for SpydeYUI",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": ["./src/index.css", "./src/reset.css", "./src/grid.css"],
+  "exports": {
+    ".": "./src/index.js",
+    "./css": "./src/index.css",
+    "./reset.css": "./src/reset.css",
+    "./grid.css": "./src/grid.css"
+  },
+  "peerDependencies": {
+    "@spydeyui/tokens": "workspace:^"
+  },
+  "files": ["src"]
+}

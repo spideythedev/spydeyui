@@ -13,7 +13,7 @@ const FOCUSABLE = [
 ].join(",");
 
 export function createFocusTrap(container, options = {}) {
-  if (!(container instanceof Element)) {
+  if (!container || container.nodeType !== 1) {
     throw new TypeError("A focus trap requires a valid container element.");
   }
 
@@ -21,7 +21,10 @@ export function createFocusTrap(container, options = {}) {
   const previous = document.activeElement;
   const initialFocus = options.initialFocus;
   const fallback = options.fallbackFocus || container;
+  const fallbackTabindex = fallback.getAttribute("tabindex");
   let active = false;
+
+  if (!fallback.hasAttribute("tabindex")) fallback.setAttribute("tabindex", "-1");
 
   const getFocusable = () => [...container.querySelectorAll(FOCUSABLE)].filter((element) => {
     return !element.hasAttribute("hidden") &&
@@ -73,6 +76,8 @@ export function createFocusTrap(container, options = {}) {
     active = false;
     document.removeEventListener("keydown", handleKeydown, true);
     if (restoreFocus && previous?.isConnected) focus(previous);
+    if (fallbackTabindex === null) fallback.removeAttribute("tabindex");
+    else fallback.setAttribute("tabindex", fallbackTabindex);
   };
 
   activate();

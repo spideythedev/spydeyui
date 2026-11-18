@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@12.21.0",
   "engines": {
-    "node": ">=20.10",
-    "pnpm": ">=9"
+    "node": ">=22.13",
+    "pnpm": ">=12"
   },
   "scripts": {
+    "build:tokens": "node scripts/build-tokens.js",
     "lint": "node scripts/check-packages.js",
     "check:packages": "node scripts/check-packages.js",
     "test": "node --test"

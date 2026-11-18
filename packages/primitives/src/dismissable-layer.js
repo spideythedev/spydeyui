@@ -5,6 +5,8 @@ function getStack(document) {
 
   if (!stack) {
     stack = [];
+    stack.pointerHandler = (event) => handlePointerDown(event, stack);
+    stack.keyHandler = (event) => handleKeyDown(event, stack);
     layers.set(document, stack);
   }
 
@@ -50,8 +52,8 @@ export function createDismissableLayer(options = {}) {
   };
 
   if (stack.length === 0) {
-    document.addEventListener("pointerdown", (event) => handlePointerDown(event, stack), true);
-    document.addEventListener("keydown", (event) => handleKeyDown(event, stack), true);
+    document.addEventListener("pointerdown", stack.pointerHandler, true);
+    document.addEventListener("keydown", stack.keyHandler, true);
   }
 
   stack.push(layer);
@@ -66,6 +68,11 @@ export function createDismissableLayer(options = {}) {
       active = false;
       const index = stack.indexOf(layer);
       if (index !== -1) stack.splice(index, 1);
+      if (stack.length === 0) {
+        document.removeEventListener("pointerdown", stack.pointerHandler, true);
+        document.removeEventListener("keydown", stack.keyHandler, true);
+        layers.delete(document);
+      }
     },
     get active() {
       return active;

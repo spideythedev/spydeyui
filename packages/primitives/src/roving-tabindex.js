@@ -1,23 +1,31 @@
 const ITEM_SELECTOR = "[data-roving-item], [role='menuitem'], [role='option'], [role='tab'], [role='radio']";
 
 export function createRovingTabindex(container, options = {}) {
-  if (!(container instanceof Element)) {
+  if (!container || container.nodeType !== 1) {
     throw new TypeError("Roving tabindex requires a valid container element.");
   }
 
   const orientation = options.orientation || "both";
   const loop = options.loop !== false;
   const direction = options.direction || "ltr";
+  const originalTabindex = new Map();
   let items = [];
   let currentIndex = 0;
 
   const refresh = () => {
-    items = [...container.querySelectorAll(options.selector || ITEM_SELECTOR)].filter((item) => {
+    const nextItems = [...container.querySelectorAll(options.selector || ITEM_SELECTOR)].filter((item) => {
       return !item.hasAttribute("disabled") &&
         item.getAttribute("aria-disabled") !== "true" &&
         item.getAttribute("hidden") === null;
     });
 
+    for (const item of nextItems) {
+      if (!originalTabindex.has(item)) {
+        originalTabindex.set(item, item.getAttribute("tabindex"));
+      }
+    }
+
+    items = nextItems;
     const selected = items.findIndex((item) => item === container.ownerDocument.activeElement);
     const current = items.findIndex((item) => item.tabIndex === 0);
     currentIndex = selected >= 0 ? selected : Math.max(0, current);
@@ -73,9 +81,11 @@ export function createRovingTabindex(container, options = {}) {
     focusAt,
     destroy() {
       container.removeEventListener("keydown", handleKeydown);
-      items.forEach((item) => {
-        item.tabIndex = 0;
-      });
+      for (const [item, tabindex] of originalTabindex) {
+        if (tabindex === null) item.removeAttribute("tabindex");
+        else item.setAttribute("tabindex", tabindex);
+      }
+      originalTabindex.clear();
     }
   };
 }

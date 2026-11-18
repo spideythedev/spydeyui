@@ -13,7 +13,11 @@
     ".": "./src/index.js",
     "./css": "./src/index.css",
     "./reset.css": "./src/reset.css",
-    "./grid.css": "./src/grid.css"
+    "./grid.css": "./src/grid.css",
+    "./button.css": "./src/components/button/button.css",
+    "./badge.css": "./src/components/badge/badge.css",
+    "./input.css": "./src/components/input/input.css",
+    "./card.css": "./src/components/card/card.css"
   },
   "files": [
     "src"

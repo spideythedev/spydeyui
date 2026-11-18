@@ -8,6 +8,7 @@
   "exports": {
     ".": "./src/index.js",
     "./css": "./dist/tokens.css",
+    "./figma": "./dist/figma-tokens.json",
     "./palette": "./src/palette.json",
     "./spacing": "./src/spacing.json",
     "./typography": "./src/typography.json",

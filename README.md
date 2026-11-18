@@ -2,7 +2,7 @@
 
 A lightweight, accessible UI foundation built on the native web platform.
 
-SpydeYUI is an open-source interface system for teams that want deliberate design foundations without unnecessary runtime weight. It starts with design tokens and framework-independent CSS, then grows through small, composable packages.
+SpydeYUI is an open-source interface system for teams that want deliberate design foundations without unnecessary runtime weight. It starts with generated design tokens and framework-independent CSS, then grows through small, composable packages.
 
 ## Principles
 
@@ -15,7 +15,7 @@ SpydeYUI is an open-source interface system for teams that want deliberate desig
 
 ## Project status
 
-SpydeYUI is in active foundation work. Public APIs are not stable yet. The foundation includes generated design tokens, framework-independent CSS, and browser-native accessibility primitives. Public APIs are not stable yet.
+SpydeYUI is in active foundation work. The current release establishes generated design tokens, framework-independent CSS, and browser-native accessibility primitives. Public APIs are not stable yet.
 
 ## Development
 
@@ -32,7 +32,7 @@ pnpm test
 
 | Package | Purpose |
 | --- | --- |
-| `@spydeyui/tokens` | Shared design tokens and theme styles |
+| `@spydeyui/tokens` | Shared design tokens, theme styles and Figma export |
 | `@spydeyui/core` | Framework-independent CSS foundation |
 | `@spydeyui/primitives` | Dependency-free accessibility and interaction utilities |
 
@@ -90,3 +90,13 @@ Set the theme on the document root:
 ```
 
 Available themes are `obsidian`, `daylight` and `high-contrast`. Obsidian is the default.
+
+## Token exports
+
+The token package exposes source JSON, generated CSS variables and a Figma Tokens-compatible JSON export:
+
+```js
+import { palette, spacing, themes } from "@spydeyui/tokens";
+import "@spydeyui/tokens/css";
+import figmaTokens from "@spydeyui/tokens/figma" with { type: "json" };
+```

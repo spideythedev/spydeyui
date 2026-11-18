@@ -8,16 +8,30 @@ export function createRovingTabindex(container, options = {}) {
   const orientation = options.orientation || "both";
   const loop = options.loop !== false;
   const direction = options.direction || "ltr";
+
+  if (!["horizontal", "vertical", "both"].includes(orientation)) {
+    throw new TypeError("Orientation must be horizontal, vertical or both.");
+  }
+
+  if (!["ltr", "rtl"].includes(direction)) {
+    throw new TypeError("Direction must be ltr or rtl.");
+  }
+
   const originalTabindex = new Map();
   let items = [];
-  let currentIndex = 0;
+  let currentItem = null;
+
+  const isAvailable = (item) => {
+    const style = container.ownerDocument.defaultView?.getComputedStyle(item);
+    return !item.hasAttribute("disabled") &&
+      item.getAttribute("aria-disabled") !== "true" &&
+      !item.closest("[hidden], [inert], [aria-hidden='true']") &&
+      style?.display !== "none" &&
+      style?.visibility !== "hidden";
+  };
 
   const refresh = () => {
-    const nextItems = [...container.querySelectorAll(options.selector || ITEM_SELECTOR)].filter((item) => {
-      return !item.hasAttribute("disabled") &&
-        item.getAttribute("aria-disabled") !== "true" &&
-        item.getAttribute("hidden") === null;
-    });
+    const nextItems = [...container.querySelectorAll(options.selector || ITEM_SELECTOR)].filter(isAvailable);
 
     for (const item of nextItems) {
       if (!originalTabindex.has(item)) {
@@ -26,28 +40,34 @@ export function createRovingTabindex(container, options = {}) {
     }
 
     items = nextItems;
-    const selected = items.findIndex((item) => item === container.ownerDocument.activeElement);
-    const current = items.findIndex((item) => item.tabIndex === 0);
-    currentIndex = selected >= 0 ? selected : Math.max(0, current);
-    items.forEach((item, index) => {
-      item.tabIndex = index === currentIndex ? 0 : -1;
+    const active = items.find((item) => item === container.ownerDocument.activeElement);
+    const current = items.find((item) => item === currentItem);
+    const tabbable = items.find((item) => item.tabIndex === 0);
+    currentItem = active || current || tabbable || items[0] || null;
+
+    items.forEach((item) => {
+      item.tabIndex = item === currentItem ? 0 : -1;
     });
   };
 
   const focusAt = (index) => {
     if (!items.length) return;
-    currentIndex = loop
+
+    const nextIndex = loop
       ? (index + items.length) % items.length
       : Math.max(0, Math.min(index, items.length - 1));
-    items.forEach((item, itemIndex) => {
-      item.tabIndex = itemIndex === currentIndex ? 0 : -1;
+
+    currentItem = items[nextIndex];
+    items.forEach((item) => {
+      item.tabIndex = item === currentItem ? 0 : -1;
     });
-    items[currentIndex].focus();
+    currentItem.focus();
   };
 
   const handleKeydown = (event) => {
-    const index = items.indexOf(event.target);
-    if (index < 0) return;
+    const target = items.find((item) => item === event.target || item.contains(event.target));
+    const index = items.indexOf(target);
+    if (index < 0 || event.altKey || event.ctrlKey || event.metaKey) return;
 
     let next = index;
     const previousKey = direction === "rtl" ? "ArrowRight" : "ArrowLeft";
@@ -86,6 +106,8 @@ export function createRovingTabindex(container, options = {}) {
         else item.setAttribute("tabindex", tabindex);
       }
       originalTabindex.clear();
+      items = [];
+      currentItem = null;
     }
   };
 }

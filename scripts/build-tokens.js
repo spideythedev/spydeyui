@@ -42,7 +42,7 @@ function themeBlock(name, theme) {
 
 const css = [
   Object.entries(themes).map(([name, theme]) => themeBlock(name, theme)).join("\n\n"),
-  `:root {\n${declarations(palette.status, "--spydeyui-color-")}\n${declarations(palette.statusForeground, "--spydeyui-color-")}\n${declarations(spacing, "--spydeyui-space-")}\n${declarations(typography.fontFamily, "--spydeyui-font-")}\n${declarations(motion.duration, "--spydeyui-duration-")}\n${declarations(motion.easing, "--spydeyui-easing-")}\n}`
+  `:root {\n${declarations(palette.status, "--spydeyui-color-")}\n${declarations(Object.fromEntries(Object.entries(palette.statusForeground).map(([key, value]) => [`${key}Foreground`, value])), "--spydeyui-color-")}\n${declarations(spacing, "--spydeyui-space-")}\n${declarations(typography.fontFamily, "--spydeyui-font-")}\n${declarations(motion.duration, "--spydeyui-duration-")}\n${declarations(motion.easing, "--spydeyui-easing-")}\n}`
 ].join("\n\n") + "\n";
 
 const figmaTokens = {

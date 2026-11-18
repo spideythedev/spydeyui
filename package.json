@@ -10,6 +10,7 @@
   },
   "scripts": {
     "lint": "node scripts/check-packages.js",
-    "check:packages": "node scripts/check-packages.js"
+    "check:packages": "node scripts/check-packages.js",
+    "test": "node --test"
   }
 }

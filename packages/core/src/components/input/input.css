@@ -42,7 +42,7 @@
 }
 
 .sy-input[aria-invalid="true"] {
-  border-color: #dc2626;
+  border-color: var(--spydeyui-color-danger, #dc2626);
 }
 
 .sy-input-description {
@@ -51,6 +51,6 @@
 }
 
 .sy-input-error {
-  color: #f87171;
+  color: var(--spydeyui-color-danger-foreground, #f87171);
   font-size: 0.8125rem;
 }

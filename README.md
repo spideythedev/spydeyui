@@ -32,10 +32,15 @@ pnpm lint
 | --- | --- |
 | `@spydeyui/tokens` | Shared design tokens and theme styles |
 | `@spydeyui/core` | Framework-independent CSS foundation |
+| `@spydeyui/primitives` | Dependency-free accessibility and interaction utilities |
 
 ## Contributing
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+## Accessibility primitives
+
+The primitives package provides focus management, portals, dismissable layers, roving tabindex and live announcements. See [the primitives guide](packages/primitives/README.md) for API usage.
 
 ## Using the core styles
 

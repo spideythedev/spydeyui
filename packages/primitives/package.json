@@ -1,0 +1,16 @@
+{
+  "name": "@spydeyui/primitives",
+  "version": "0.1.0",
+  "description": "Small accessible interaction primitives for SpydeYUI",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./focus-trap": "./src/focus-trap.js",
+    "./portal": "./src/portal.js",
+    "./dismissable-layer": "./src/dismissable-layer.js",
+    "./roving-tabindex": "./src/roving-tabindex.js",
+    "./aria-announcer": "./src/aria-announcer.js"
+  },
+  "files": ["src"]
+}

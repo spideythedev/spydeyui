@@ -1,0 +1,22 @@
+{
+  "color": {
+    "background": "#000000",
+    "surface": "#000000",
+    "surfaceRaised": "#111111",
+    "foreground": "#ffffff",
+    "muted": "#ffffff",
+    "subtle": "#e5e5e5",
+    "border": "#ffffff",
+    "borderStrong": "#ffffff",
+    "accent": "#ffff00",
+    "accentForeground": "#000000",
+    "focus": "#00ffff"
+  },
+  "radius": {
+    "none": "0",
+    "sm": "0",
+    "md": "0",
+    "lg": "0",
+    "full": "9999px"
+  }
+}

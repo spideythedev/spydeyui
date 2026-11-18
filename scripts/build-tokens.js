@@ -1,5 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -48,7 +48,8 @@ const css = [
 const figmaTokens = {
   color: {
     neutral: Object.fromEntries(Object.entries(palette.neutral).map(([key, value]) => [key, { $type: "color", $value: value }])),
-    status: Object.fromEntries(Object.entries(palette.status).map(([key, value]) => [key, { $type: "color", $value: value }]))
+    status: Object.fromEntries(Object.entries(palette.status).map(([key, value]) => [key, { $type: "color", $value: value }])),
+    statusForeground: Object.fromEntries(Object.entries(palette.statusForeground).map(([key, value]) => [key, { $type: "color", $value: value }]))
   },
   spacing: Object.fromEntries(Object.entries(spacing).map(([key, value]) => [key, { $type: "dimension", $value: value }])),
   typography,

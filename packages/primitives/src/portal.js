@@ -22,7 +22,7 @@ export function createPortal(content, options = {}) {
     }
   }
 
-  if (content instanceof Node) {
+  if (content && typeof content === "object" && "nodeType" in content) {
     element.append(content);
   } else if (content !== null && content !== undefined) {
     element.textContent = String(content);

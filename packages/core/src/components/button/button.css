@@ -54,7 +54,7 @@
 }
 
 .sy-button--danger {
-  background: #dc2626;
+  background: var(--spydeyui-color-danger, #dc2626);
   color: #ffffff;
 }
 

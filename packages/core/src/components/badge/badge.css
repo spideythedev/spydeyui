@@ -1,0 +1,43 @@
+.sy-badge {
+  display: inline-flex;
+  min-height: 1.5rem;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--spydeyui-color-border, #27272a);
+  border-radius: var(--spydeyui-radius-sm, 2px);
+  background: var(--spydeyui-color-surface, #121215);
+  color: var(--spydeyui-color-foreground, #fafafa);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.sy-badge--success {
+  border-color: color-mix(in srgb, #16a34a 35%, transparent);
+  background: color-mix(in srgb, #16a34a 12%, transparent);
+  color: #4ade80;
+}
+
+.sy-badge--warning {
+  border-color: color-mix(in srgb, #d97706 35%, transparent);
+  background: color-mix(in srgb, #d97706 12%, transparent);
+  color: #fbbf24;
+}
+
+.sy-badge--danger {
+  border-color: color-mix(in srgb, #dc2626 35%, transparent);
+  background: color-mix(in srgb, #dc2626 12%, transparent);
+  color: #f87171;
+}
+
+.sy-badge--info {
+  border-color: color-mix(in srgb, #2563eb 35%, transparent);
+  background: color-mix(in srgb, #2563eb 12%, transparent);
+  color: #60a5fa;
+}
+
+.sy-badge--outline {
+  background: transparent;
+}

@@ -63,6 +63,7 @@ export function createFocusTrap(container, options = {}) {
 
   const activate = () => {
     if (active) return;
+    if (!fallback.hasAttribute("tabindex")) fallback.setAttribute("tabindex", "-1");
     active = true;
     document.addEventListener("keydown", handleKeydown, true);
     const target = typeof initialFocus === "function"

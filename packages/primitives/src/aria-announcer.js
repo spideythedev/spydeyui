@@ -1,5 +1,26 @@
 const regions = new WeakMap();
 
+function createRegion(document, target) {
+  const element = document.createElement("div");
+  element.setAttribute("aria-live", "polite");
+  element.setAttribute("aria-atomic", "true");
+  element.setAttribute("role", "status");
+  element.setAttribute("data-spydeyui-announcer", "");
+  Object.assign(element.style, {
+    position: "absolute",
+    width: "1px",
+    height: "1px",
+    padding: "0",
+    margin: "-1px",
+    overflow: "hidden",
+    clip: "rect(0, 0, 0, 0)",
+    whiteSpace: "nowrap",
+    border: "0"
+  });
+  target.append(element);
+  return element;
+}
+
 export function createAriaAnnouncer(options = {}) {
   const document = options.document || globalThis.document;
 
@@ -7,46 +28,43 @@ export function createAriaAnnouncer(options = {}) {
     throw new Error("A document is required to create an announcer.");
   }
 
-  let region = regions.get(document);
+  let entry = regions.get(document);
 
-  if (!region || !region.isConnected) {
-    region = document.createElement("div");
-    region.setAttribute("aria-live", "polite");
-    region.setAttribute("aria-atomic", "true");
-    region.setAttribute("role", "status");
-    region.setAttribute("data-spydeyui-announcer", "");
-    Object.assign(region.style, {
-      position: "absolute",
-      width: "1px",
-      height: "1px",
-      padding: "0",
-      margin: "-1px",
-      overflow: "hidden",
-      clip: "rect(0, 0, 0, 0)",
-      whiteSpace: "nowrap",
-      border: "0"
-    });
-    (options.target || document.body).append(region);
-    regions.set(document, region);
+  if (!entry || !entry.element.isConnected) {
+    entry = {
+      element: createRegion(document, options.target || document.body),
+      references: 0
+    };
+    regions.set(document, entry);
   }
+
+  entry.references += 1;
+  let active = true;
 
   return {
     announce(message, settings = {}) {
-      region.setAttribute("aria-live", settings.priority === "assertive" ? "assertive" : "polite");
-      region.setAttribute("role", settings.priority === "assertive" ? "alert" : "status");
-      region.textContent = "";
+      if (!active) return;
+      entry.element.setAttribute("aria-live", settings.priority === "assertive" ? "assertive" : "polite");
+      entry.element.setAttribute("role", settings.priority === "assertive" ? "alert" : "status");
+      entry.element.textContent = "";
       queueMicrotask(() => {
-        if (region.isConnected) region.textContent = String(message ?? "");
+        if (active && entry.element.isConnected) {
+          entry.element.textContent = String(message ?? "");
+        }
       });
     },
     clear() {
-      region.textContent = "";
+      if (active) entry.element.textContent = "";
     },
     destroy() {
-      if (regions.get(document) !== region) return;
-      region.remove();
-      regions.delete(document);
+      if (!active) return;
+      active = false;
+      entry.references -= 1;
+      if (entry.references === 0) {
+        entry.element.remove();
+        regions.delete(document);
+      }
     },
-    element: region
+    element: entry.element
   };
 }

@@ -1,0 +1,18 @@
+{
+  "name": "@spydeyui/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens and theme styles for SpydeYUI",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": ["./dist/tokens.css"],
+  "exports": {
+    ".": "./src/index.js",
+    "./css": "./dist/tokens.css",
+    "./palette": "./src/palette.json",
+    "./spacing": "./src/spacing.json",
+    "./typography": "./src/typography.json",
+    "./motion": "./src/motion.json",
+    "./themes/*": "./src/themes/*.json"
+  },
+  "files": ["src", "dist"]
+}

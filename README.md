@@ -15,15 +15,17 @@ SpydeYUI is an open-source interface system for teams that want deliberate desig
 
 ## Project status
 
-SpydeYUI is in active foundation work. Public APIs are not stable yet. The first milestone establishes workspace conventions, design tokens and the core CSS layer.
+SpydeYUI is in active foundation work. Public APIs are not stable yet. The foundation includes generated design tokens, framework-independent CSS, and browser-native accessibility primitives. Public APIs are not stable yet.
 
 ## Development
 
-Use Node.js 20 or newer and pnpm 9 or newer.
+Use Node.js 24 LTS and pnpm 12.
 
 ```sh
 pnpm install
+pnpm build:tokens
 pnpm lint
+pnpm test
 ```
 
 ## Packages

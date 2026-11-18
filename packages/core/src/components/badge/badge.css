@@ -15,27 +15,27 @@
 }
 
 .sy-badge--success {
-  border-color: color-mix(in srgb, #16a34a 35%, transparent);
-  background: color-mix(in srgb, #16a34a 12%, transparent);
-  color: #4ade80;
+  border-color: color-mix(in srgb, var(--spydeyui-color-success, #16a34a) 35%, transparent);
+  background: color-mix(in srgb, var(--spydeyui-color-success, #16a34a) 12%, transparent);
+  color: var(--spydeyui-color-success-foreground, #4ade80);
 }
 
 .sy-badge--warning {
-  border-color: color-mix(in srgb, #d97706 35%, transparent);
-  background: color-mix(in srgb, #d97706 12%, transparent);
-  color: #fbbf24;
+  border-color: color-mix(in srgb, var(--spydeyui-color-warning, #d97706) 35%, transparent);
+  background: color-mix(in srgb, var(--spydeyui-color-warning, #d97706) 12%, transparent);
+  color: var(--spydeyui-color-warning-foreground, #fbbf24);
 }
 
 .sy-badge--danger {
-  border-color: color-mix(in srgb, #dc2626 35%, transparent);
-  background: color-mix(in srgb, #dc2626 12%, transparent);
-  color: #f87171;
+  border-color: color-mix(in srgb, var(--spydeyui-color-danger, #dc2626) 35%, transparent);
+  background: color-mix(in srgb, var(--spydeyui-color-danger, #dc2626) 12%, transparent);
+  color: var(--spydeyui-color-danger-foreground, #f87171);
 }
 
 .sy-badge--info {
-  border-color: color-mix(in srgb, #2563eb 35%, transparent);
-  background: color-mix(in srgb, #2563eb 12%, transparent);
-  color: #60a5fa;
+  border-color: color-mix(in srgb, var(--spydeyui-color-info, #2563eb) 35%, transparent);
+  background: color-mix(in srgb, var(--spydeyui-color-info, #2563eb) 12%, transparent);
+  color: var(--spydeyui-color-info-foreground, #60a5fa);
 }
 
 .sy-badge--outline {

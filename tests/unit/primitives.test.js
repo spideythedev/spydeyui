@@ -47,6 +47,9 @@ function createContainer(items) {
     removeEventListener: (name) => listeners.delete(name),
     dispatch(event) {
       listeners.get(event.type)?.(event);
+    },
+    get listenerCount() {
+      return listeners.size;
     }
   };
   for (const item of items) item.ownerDocument = document;
@@ -90,7 +93,7 @@ test("roving tabindex keeps one tab stop and moves focus with arrow keys", () =>
   assert.equal(document.activeElement, items[1]);
   assert.deepEqual(items.map((item) => item.tabIndex), [-1, 0, -1]);
   roving.destroy();
-  assert.equal(container.listeners.size, 0);
+  assert.equal(container.listenerCount, 0);
 });
 
 test("roving tabindex restores original attributes on destroy", () => {

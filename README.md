@@ -36,3 +36,50 @@ pnpm lint
 ## Contributing
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+## Using the core styles
+
+Install the packages in your application:
+
+```sh
+pnpm add @spydeyui/core @spydeyui/tokens
+```
+
+Import the complete foundation once in your application entry stylesheet:
+
+```css
+@import "@spydeyui/core/css";
+```
+
+Use the component classes with native HTML:
+
+```html
+<button class="sy-button">Continue</button>
+<button class="sy-button sy-button--secondary">Cancel</button>
+
+<span class="sy-badge sy-badge--success">Available</span>
+
+<label class="sy-field">
+  <span class="sy-label">Email</span>
+  <input class="sy-input" type="email" autocomplete="email">
+</label>
+
+<section class="sy-card">
+  <header class="sy-card-header">
+    <h2 class="sy-card-title">Account</h2>
+  </header>
+  <div class="sy-card-content">
+    Your account details are ready.
+  </div>
+</section>
+```
+
+## Themes
+
+Set the theme on the document root:
+
+```html
+<html lang="en" data-theme="daylight">
+```
+
+Available themes are `obsidian`, `daylight` and `high-contrast`. Obsidian is the default.

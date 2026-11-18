@@ -8,7 +8,7 @@ Check existing issues and discussions before starting substantial work. For larg
 
 ## Development setup
 
-Use Node.js 20 or newer and pnpm 9 or newer.
+Use Node.js 24 LTS and pnpm 12.
 
 ```sh
 pnpm install
